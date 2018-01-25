@@ -1,7 +1,10 @@
 <header>
-    <form>
-        <mat-form-field class="example-full-width">
-            <input matInput placeholder="Search for an artist">
-        </mat-form-field>
+    <form *ngIf="isSearching">
+        <input type="search">
+        <input type="submit">
     </form>
+    <img src="assets/lastfm-logo.png" alt="lastfm-logo" class="lastfm-logo-img">
+    <nav *ngIf="!isSearching">
+        <button (click)="triggerSearching()">Search</button>
+    </nav>
 </header>

@@ -1,5 +1,6 @@
 const webpack = require('webpack');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
+const CopyWebpackPlugin = require('copy-webpack-plugin');
 const path = require('path');
 
 module.exports = {
@@ -62,6 +63,11 @@ module.exports = {
 
     new HtmlWebpackPlugin({
       template: 'src/index.html'
-    })
+    }),
+
+    new CopyWebpackPlugin([
+      { from: 'node_modules/@angular/material/prebuilt-themes/deeppurple-amber.css', to: 'styles/' },
+      { from: 'assets/lastfm-logo.png', to: 'assets/' },
+    ]),
   ]
 };
