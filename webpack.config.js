@@ -3,6 +3,7 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 const path = require('path');
 
 module.exports = {
+  devtool: 'inline-sourcemap',
   entry: {
     polyfills: './src/polyfills.ts',
     vendor: './src/vendor.ts',
@@ -15,7 +16,7 @@ module.exports = {
   },
 
   resolve: {
-    extensions: ['.ts', '.js', 'html', 'css']
+    extensions: ['.ts', '.js', 'html', 'css', 'scss']
   },
 
   module: {
@@ -28,6 +29,11 @@ module.exports = {
       {
         test: /\.(png|jpe?g|gif|svg|woff|woff2|ttf|eot|ico)$/,
         loader: 'file-loader?name=assets/[name].[hash].[ext]'
+      },
+      {
+        test: /\.scss$/,
+        loaders: ['raw-loader', 'sass-loader'],
+        exclude: /node_modules/
       },
       /* Embed files. */
       { 
