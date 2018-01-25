@@ -44,11 +44,11 @@ module.exports = {
   },
 
   plugins: [
-    // Workaround for angular/angular#11580
+    // Workaround for angular/angular#11580 (https://angular.io/guide/webpack)
     new webpack.ContextReplacementPlugin(
-      /angular(\\|\/)core(\\|\/)@angular/,
-      path.resolve(__dirname, '../src')
-    ),
+      /(.+)?angular(\\|\/)core(.+)?/,
+      path.resolve(__dirname, './src')
+  ),
 
     new webpack.optimize.CommonsChunkPlugin({
       name: ['app', 'vendor', 'polyfills']
