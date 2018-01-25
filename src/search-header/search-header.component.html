@@ -1,0 +1,15 @@
+<header class="lastfm-header">
+    <nav>
+        <div *ngIf="!isSearching" class="grow lastfm-banner">
+            <a href="https://www.last.fm/">
+                <img src="assets/lastfm-logo.png" alt="lastfm-logo" class="lastfm-logo-img">            
+            </a>
+        </div>
+        <form *ngIf="isSearching" class="grow search-form">
+            <input type="search" placeholder="Search for an artist..." autofocus>
+        </form>
+        <button (click)="triggerSearching()" class="no-grow trigger-search-button">
+            <i class="fa" [ngClass]="{'fa-search': !isSearching, 'fa-times': isSearching}" aria-hidden="true"></i>
+        </button>     
+    </nav>
+</header>

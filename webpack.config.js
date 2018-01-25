@@ -66,6 +66,7 @@ module.exports = {
     }),
 
     new CopyWebpackPlugin([
+      { from: './src/style.css', to: 'styles/' },      
       { from: 'node_modules/@angular/material/prebuilt-themes/deeppurple-amber.css', to: 'styles/' },
       { from: 'assets/lastfm-logo.png', to: 'assets/' },
     ]),

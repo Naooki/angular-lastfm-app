@@ -1,0 +1,62 @@
+header {
+    height: 60px;
+    background-color: #000;
+}
+
+nav {
+    display: flex;
+    height: 100%;
+
+    .grow {
+        flex-grow: 1;
+    }
+    .no-grow {
+        flex-grow: 0;
+    }
+
+    .lastfm-banner {
+        display: flex;
+        justify-content: center;
+        a {
+            margin-top: 4px;
+            img {
+                height: 40px;
+            }
+        }
+    }
+
+    .search-form {
+        padding: 8px;
+
+        input {
+            height: 100%;
+            width: 100%;
+            background-color: transparent;
+            border: none;
+            color: #fff;
+            font-size: 1.8rem;
+        }
+
+        input:focus {
+            outline: none;
+        }
+        input[type="search"]::-webkit-search-cancel-button {
+            display: none;
+        }
+    }
+
+    .trigger-search-button {
+        border: 0;
+        width: 60px;
+        font-size: 1.8rem;
+        color: #fff;
+        background-color: #b90000;
+    }
+    .trigger-search-button:hover {
+        background-color: #d50000;
+    }
+    .trigger-search-button:focus,
+    .trigger-search-button:active {
+        outline: none;
+    }
+}
