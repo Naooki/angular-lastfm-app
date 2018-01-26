@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, ViewChild, ElementRef, Renderer } from '@angular/core';
 
 @Component({
   selector: 'lastfm-header',
@@ -7,10 +7,18 @@ import { Component } from '@angular/core';
 })
 export class SearchHeaderComponent { 
     isSearching = false;
+    @ViewChild('searchInput') private searchInput: ElementRef; 
 
-    constructor() {}
+    constructor(private renderer: Renderer) {}
 
     triggerSearching() {
         this.isSearching = !this.isSearching;
+        if (this.isSearching) {
+            setTimeout(() => { 
+                this.renderer.invokeElementMethod(
+                    this.searchInput.nativeElement, 'focus', []);
+                }
+            );
+        }
     }
 }
