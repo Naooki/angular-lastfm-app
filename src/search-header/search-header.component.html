@@ -5,9 +5,9 @@
                 <img src="assets/lastfm-logo.png" alt="lastfm-logo" class="lastfm-logo-img">            
             </a>
         </div>
-        <form *ngIf="isSearching" class="grow search-form">
+        <div *ngIf="isSearching" class="grow search-box">
             <input type="search" placeholder="Search for an artist..." autofocus>
-        </form>
+        </div>
         <button (click)="triggerSearching()" class="no-grow trigger-search-button">
             <i class="fa" [ngClass]="{'fa-search': !isSearching, 'fa-times': isSearching}" aria-hidden="true"></i>
         </button>     
