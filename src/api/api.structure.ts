@@ -19,3 +19,16 @@ export interface Track {
     url: string,
     img: string,
 }
+
+
+export interface SearchArtistResponse {
+    results: SearchArtistResponseResults,
+}
+
+interface SearchArtistResponseResults {
+    artistmatches: ArtistMatches,
+}
+
+interface ArtistMatches{
+    artist: Artist[],
+}

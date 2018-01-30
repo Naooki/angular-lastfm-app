@@ -9,6 +9,6 @@ import { ApiService } from '../api/api.service';
 })
 export class SearchResultsComponent { 
     constructor(
-        private apiService: ApiService,
+        public apiService: ApiService,
     ) {}
 }
