@@ -1,6 +1,7 @@
 const webpack = require('webpack');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
+const ExtractTextPlugin = require("extract-text-webpack-plugin");
 const path = require('path');
 
 module.exports = {
@@ -8,7 +9,8 @@ module.exports = {
   entry: {
     polyfills: './src/polyfills.ts',
     vendor: './src/vendor.ts',
-    app: './src/main.ts'
+    app: './src/main.ts',
+    theme: './src/theme.scss',
   },
 
   output: {
@@ -32,9 +34,15 @@ module.exports = {
         loader: 'file-loader?name=assets/[name].[hash].[ext]'
       },
       {
+        test: /theme.scss/,
+        loader: ExtractTextPlugin.extract({
+          use: ['css-loader', 'sass-loader']
+        })
+      },
+      {
         test: /\.scss$/,
         loaders: ['raw-loader', 'sass-loader'],
-        exclude: /node_modules/
+        exclude: [/node_modules/, /theme.scss/],
       },
       /* Embed files. */
       { 
@@ -58,7 +66,8 @@ module.exports = {
   ),
 
     new webpack.optimize.CommonsChunkPlugin({
-      name: ['app', 'vendor', 'polyfills']
+      name: 'common',
+      chunks: ['app', 'vendor', 'polyfills']
     }),
 
     new HtmlWebpackPlugin({
@@ -66,9 +75,9 @@ module.exports = {
     }),
 
     new CopyWebpackPlugin([
-      { from: './src/style.css', to: 'styles/' },      
-      { from: 'node_modules/@angular/material/prebuilt-themes/deeppurple-amber.css', to: 'styles/' },
       { from: 'assets/lastfm-logo.png', to: 'assets/' },
     ]),
+
+    new ExtractTextPlugin('styles/theme.css'),
   ]
 };
