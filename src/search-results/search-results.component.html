@@ -1,5 +1,7 @@
 <main>
-    <div class="content">
-        <mat-spinner></mat-spinner>        
+    <mat-spinner *ngIf="apiService.isFetching" class="spinner"></mat-spinner>
+    
+    <div class="results" *ngIf="!apiService.isFetching">
+        <lastfm-found-band [artist]="artist" *ngFor="let artist of apiService.foundArtists"></lastfm-found-band>
     </div>
 </main>

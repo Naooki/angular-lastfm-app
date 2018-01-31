@@ -2,14 +2,14 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs/Observable';
 
-import { ApiStructure, Artist, Track } from './api.structure';
+import { ApiStructure, Artist, Track, SearchArtistResponse } from './api.structure';
 
 @Injectable()
 export class ApiService {
     private baseUrl: string = 'http://ws.audioscrobbler.com/2.0/?method=';
     private apiKey: string = '605e60f866a7c8cb2424cde63736829b';
 
-    isFetching: boolean = false;
+    isFetching = false;
     foundArtists: Artist[] = [];
     topTracks: Track[] = [];
 
@@ -17,14 +17,19 @@ export class ApiService {
 
     searchArtist(name: string):void {
         const searchUrl: string = this.api.artist.search(name);
-        this.isFetching = true;
+        if (!this.isFetching) {
+            this.isFetching = true;
+        }
         this.http.get<Artist[]>(searchUrl)
-            .subscribe(this.gotArtists);
+            .subscribe(this.gotArtists.bind(this));
     }
 
-    private gotArtists(artists: Artist[]) {
-        this.foundArtists = artists;
-        console.log(this.foundArtists);
+    private gotArtists(response: SearchArtistResponse) {
+        this.foundArtists = response.results.artistmatches.artist;
+        if (this.isFetching) {
+            this.isFetching = false;
+        }
+        console.log(response);
     }
 
     private api: ApiStructure = {

@@ -1,8 +1,15 @@
 main {
     display: flex;
     height: calc(100% - 60px);
-    
-    .content {
+
+    .spinner {
         margin: auto;
+    }
+    
+    .results {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-between;
+        width: 1200px;
     }
 }
