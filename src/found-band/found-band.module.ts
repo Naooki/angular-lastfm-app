@@ -1,7 +1,11 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
-import { MatCardModule } from '@angular/material/card';
+import {
+    MatCardModule,
+    MatButtonModule,
+    MatButtonToggleModule,
+} from '@angular/material';
 
 import { FoundBandComponent } from './found-band.component';
 
@@ -9,6 +13,8 @@ import { FoundBandComponent } from './found-band.component';
     imports: [
         CommonModule,
         MatCardModule,
+        MatButtonModule,
+        MatButtonToggleModule,
     ],
     declarations: [
         FoundBandComponent,
