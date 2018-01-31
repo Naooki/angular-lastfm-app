@@ -75,7 +75,7 @@ module.exports = {
     }),
 
     new CopyWebpackPlugin([
-      { from: 'assets/lastfm-logo.png', to: 'assets/' },
+      { from: 'assets/', to: 'assets/' },
     ]),
 
     new ExtractTextPlugin('styles/theme.css'),

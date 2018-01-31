@@ -2,14 +2,14 @@ main {
     display: flex;
     height: calc(100% - 60px);
 
-    .spinner {
+    .spinner, .results {
         margin: auto;
     }
     
     .results {
         display: flex;
         flex-wrap: wrap;
-        justify-content: space-between;
+        justify-content: space-evenly;
         width: 1200px;
     }
 }
