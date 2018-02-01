@@ -13,23 +13,23 @@ export class ApiService {
     foundArtists: Artist[] = [];
     topTracks: Track[] = [];
 
+    private validSearchString: string;
+
     constructor(private http: HttpClient) { }
 
     searchArtist(name: string):void {
+        this.validSearchString = name;
         const searchUrl: string = this.api.artist.search(name);
-        if (!this.isFetching) {
-            this.isFetching = true;
-        }
         this.http.get<Artist[]>(searchUrl)
             .subscribe(this.gotArtists.bind(this));
+        this.isFetching = true;            
     }
 
     private gotArtists(response: SearchArtistResponse) {
-        this.foundArtists = response.results.artistmatches.artist;
-        if (this.isFetching) {
+        if(response.results['@attr'].for === this.validSearchString) {
+            this.foundArtists = response.results.artistmatches.artist;
             this.isFetching = false;
         }
-        console.log(response);
     }
 
     private api: ApiStructure = {
