@@ -1,4 +1,6 @@
 import { Component, ViewChild, ElementRef, Renderer } from '@angular/core';
+import { Location } from '@angular/common';
+import { NavigationEnd, Router } from '@angular/router';
 
 import { ApiService } from '../api/api.service';
 import { setTimeout } from 'timers';
@@ -10,6 +12,8 @@ import { setTimeout } from 'timers';
 })
 export class SearchHeaderComponent { 
     isSearching: boolean = false;
+    onArtistPage: boolean = false;
+
     private timeoutID: any = null;
 
     @ViewChild('searchInput') private searchInput: ElementRef; 
@@ -17,7 +21,15 @@ export class SearchHeaderComponent {
     constructor(
         private renderer: Renderer,
         private apiService: ApiService,
-    ) {}
+        private location: Location,
+        private router: Router,
+    ) {
+        router.events.subscribe(event => {
+            if (event instanceof NavigationEnd) {
+                this.onArtistPage = event.urlAfterRedirects.includes('/artist-detail');
+            }
+        });
+    }
 
     triggerSearching() {
         this.isSearching = !this.isSearching;
@@ -43,5 +55,9 @@ export class SearchHeaderComponent {
             this.timeoutID = null;
             this.apiService.searchArtist(searchValue);
         }, 1000);
+    }
+
+    backToSearch() {
+        this.location.back();
     }
 }

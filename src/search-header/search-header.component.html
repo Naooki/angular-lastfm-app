@@ -5,11 +5,16 @@
                 <img src="assets/lastfm-logo.png" alt="lastfm-logo" class="lastfm-logo-img">            
             </a>
         </div>
-        <div [hidden]="!isSearching" class="grow search-box">
+
+        <div [hidden]="!isSearching || onArtistPage" class="grow search-box">
             <input type="search" placeholder="Search for an artist..." #searchInput (input)="onSearchChange($event.target.value)">
         </div>
-        <button (click)="triggerSearching()" class="no-grow trigger-search-button">
+        <button *ngIf="!onArtistPage" (click)="triggerSearching()" class="no-grow trigger-search-button">
             <i class="fa" [ngClass]="{'fa-search': !isSearching, 'fa-times': isSearching}" aria-hidden="true"></i>
-        </button>     
+        </button> 
+        
+        <button *ngIf="onArtistPage" (click)="backToSearch()" class="no-grow trigger-search-button">
+            <i class="fa fa-arrow-left" aria-hidden="true"></i>
+        </button> 
     </nav>
 </header>
