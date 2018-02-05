@@ -1,2 +1,6 @@
-<lastfm-header></lastfm-header>
+<div>
+    <input type="checkbox" id="parent-toggler" [(ngModel)]="isToggled">
+    <label for="parent-toggler">App component toggler</label>
+</div>
+<lastfm-header [(isToggled)]="isToggled"></lastfm-header>
 <router-outlet></router-outlet>

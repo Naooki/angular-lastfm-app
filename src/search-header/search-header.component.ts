@@ -1,4 +1,4 @@
-import { Component, ViewChild, ElementRef, Renderer } from '@angular/core';
+import { Component, ViewChild, ElementRef, EventEmitter, Input, Output, Renderer } from '@angular/core';
 import { Location } from '@angular/common';
 import { NavigationEnd, Router } from '@angular/router';
 
@@ -10,7 +10,21 @@ import { setTimeout } from 'timers';
   templateUrl: './search-header.component.html',
   styleUrls: ['./search-header.scss']
 })
-export class SearchHeaderComponent { 
+export class SearchHeaderComponent {
+    isToggledValue: boolean;
+
+    @Input()
+    get isToggled() {
+        return this.isToggledValue;
+    }
+
+    @Output() isToggledChange: EventEmitter<boolean> = new EventEmitter<boolean>();
+    set isToggled(val) {
+        this.isToggledValue = val;
+        this.isToggledChange.emit(this.isToggledValue);
+    }
+
+
     isSearching: boolean = false;
     onArtistPage: boolean = false;
 
