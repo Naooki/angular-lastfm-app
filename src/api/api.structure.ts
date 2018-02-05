@@ -14,6 +14,7 @@ export interface Artist {
 }
 
 export interface Track {
+    name: string,
     playcount: number,
     listeners: number,
     url: string,
@@ -31,4 +32,12 @@ interface SearchArtistResponseResults {
 
 interface ArtistMatches{
     artist: Artist[],
+}
+
+export interface GetTopTracksResponse {
+    toptracks: TopTracks,
+}
+
+interface TopTracks {
+    track: Track[],
 }

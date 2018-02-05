@@ -1,8 +1,9 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs/Observable';
+import { map } from 'rxjs/operators';
 
-import { ApiStructure, Artist, Track, SearchArtistResponse } from './api.structure';
+import { ApiStructure, Artist, GetTopTracksResponse, SearchArtistResponse, Track } from './api.structure';
 
 @Injectable()
 export class ApiService {
@@ -25,6 +26,13 @@ export class ApiService {
         this.isFetching = true;            
     }
 
+    getTopTracks(name: string): Observable<Track[]> {
+        const requestUrl: string = this.api.artist.getTopTracks(name);
+        this.isFetching = true; 
+        return this.http.get<GetTopTracksResponse>(requestUrl)
+            .map((resp: GetTopTracksResponse) => resp.toptracks.track);
+    }
+
     private gotArtists(response: SearchArtistResponse) {
         if(response.results['@attr'].for === this.validSearchString) {
             this.foundArtists = response.results.artistmatches.artist;
@@ -34,7 +42,7 @@ export class ApiService {
 
     private api: ApiStructure = {
         artist: {
-            getTopTracks: (name: string) => `${this.baseUrl}artist.search&artist=${name}&api_key=${this.apiKey}&format=json`,
+            getTopTracks: (name: string) => `${this.baseUrl}artist.gettoptracks&artist=${name}&api_key=${this.apiKey}&format=json`,
             search: (name: string) => `${this.baseUrl}artist.search&artist=${name}&api_key=${this.apiKey}&format=json`,
         }
     }

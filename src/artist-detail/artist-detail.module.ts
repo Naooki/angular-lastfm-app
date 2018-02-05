@@ -1,6 +1,11 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+
+import {
+    MatProgressSpinnerModule,
+    MatListModule,
+    MatIconModule,
+} from '@angular/material';
 
 import { ArtistDetailComponent } from './artist-detail.component';
 
@@ -8,6 +13,8 @@ import { ArtistDetailComponent } from './artist-detail.component';
     imports: [
         CommonModule,
         MatProgressSpinnerModule,
+        MatListModule,
+        MatIconModule,
     ],
     declarations: [
         ArtistDetailComponent,
