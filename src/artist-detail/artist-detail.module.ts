@@ -3,18 +3,16 @@ import { CommonModule } from '@angular/common';
 
 import {
     MatProgressSpinnerModule,
-    MatListModule,
-    MatIconModule,
 } from '@angular/material';
 
 import { ArtistDetailComponent } from './artist-detail.component';
+import { FoundTrackModule } from '../found-track/found-track.module';
 
 @NgModule({
     imports: [
         CommonModule,
         MatProgressSpinnerModule,
-        MatListModule,
-        MatIconModule,
+        FoundTrackModule,
     ],
     declarations: [
         ArtistDetailComponent,

@@ -1,0 +1,15 @@
+main {
+    display: flex;
+    height: calc(100% - 60px);
+
+    .spinner, .results {
+        margin: auto;
+    }
+    
+    .results {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-evenly;
+        max-width: 1200px;
+    }
+}

@@ -31,7 +31,7 @@ export class SearchHeaderComponent {
         });
     }
 
-    triggerSearching() {
+    triggerSearching(): void {
         this.isSearching = !this.isSearching;
         if (this.isSearching) {
             setTimeout(() => { 
@@ -41,7 +41,7 @@ export class SearchHeaderComponent {
         }
     }
 
-    onSearchChange(searchValue: string) {
+    onSearchChange(searchValue: string): void {
         if(!searchValue) {
             return;
         } else if (!this.apiService.isFetching && !this.timeoutID) {
@@ -57,7 +57,7 @@ export class SearchHeaderComponent {
         }, 1000);
     }
 
-    backToSearch() {
+    backToSearch(): void {
         this.location.back();
     }
 }

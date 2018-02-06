@@ -1,0 +1,15 @@
+<mat-card>
+    <mat-card-header>
+        <div mat-card-avatar></div>
+        <mat-card-title>{{track.artist.name}}</mat-card-title>
+        <mat-card-subtitle>{{track.name}}</mat-card-subtitle>
+    </mat-card-header>
+    <img mat-card-image src="{{track.image[3]['#text'] || 'assets/no-track-image.png'}}" alt="Art of a track">
+    <mat-card-content>
+        Listeners: {{track.listeners}}
+        Playcount: {{track.playcount}}
+    </mat-card-content>
+    <mat-card-actions>
+        <a mat-button href="{{track.url}}">View on LastFM</a>
+    </mat-card-actions>
+</mat-card>

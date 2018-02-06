@@ -24,6 +24,8 @@ export class ArtistDetailComponent implements OnInit {
     private getDetails(): void {
         const name = this.route.snapshot.paramMap.get('name');
         this.apiService.getTopTracks(name)
-            .subscribe((resp: Track[]) => console.log(resp));
+            .subscribe((tracks: Track[]) => {
+                this.topTracks = tracks;
+            });
     }
 }

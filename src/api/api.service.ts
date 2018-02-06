@@ -18,7 +18,7 @@ export class ApiService {
 
     constructor(private http: HttpClient) { }
 
-    searchArtist(name: string):void {
+    searchArtist(name: string): void {
         this.validSearchString = name;
         const searchUrl: string = this.api.artist.search(name);
         this.http.get<Artist[]>(searchUrl)
@@ -26,18 +26,21 @@ export class ApiService {
         this.isFetching = true;            
     }
 
-    getTopTracks(name: string): Observable<Track[]> {
-        const requestUrl: string = this.api.artist.getTopTracks(name);
-        this.isFetching = true; 
-        return this.http.get<GetTopTracksResponse>(requestUrl)
-            .map((resp: GetTopTracksResponse) => resp.toptracks.track);
-    }
-
-    private gotArtists(response: SearchArtistResponse) {
+    private gotArtists(response: SearchArtistResponse): void {
         if(response.results['@attr'].for === this.validSearchString) {
             this.foundArtists = response.results.artistmatches.artist;
             this.isFetching = false;
         }
+    }
+
+    getTopTracks(name: string): Observable<Track[]> {
+        const requestUrl: string = this.api.artist.getTopTracks(name);
+        this.isFetching = true; 
+        return this.http.get<GetTopTracksResponse>(requestUrl)
+            .map((resp: GetTopTracksResponse) => {
+                this.isFetching = false;      
+                return resp.toptracks.track;
+            });
     }
 
     private api: ApiStructure = {
