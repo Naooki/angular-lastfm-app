@@ -9,22 +9,22 @@ import { SearchResultsModule } from '../search-results/search-results.module';
 import { ArtistDetailModule } from '../artist-detail/artist-detail.module';
 
 import { AppComponent } from './app.component';
- 
+
 @NgModule({
-  imports: [
-    BrowserModule,
-    BrowserAnimationsModule,
-    ApiModule,
-    SearchHeaderModule,
-    SearchResultsModule,
-    ArtistDetailModule,
-    AppRoutingModule,
-  ],
-  declarations: [
-    AppComponent,
-  ],
-  bootstrap: [
-    AppComponent,
-  ],
+    imports: [
+        BrowserModule,
+        BrowserAnimationsModule,
+        ApiModule,
+        SearchHeaderModule,
+        SearchResultsModule,
+        ArtistDetailModule,
+        AppRoutingModule,
+    ],
+    declarations: [
+        AppComponent,
+    ],
+    bootstrap: [
+        AppComponent,
+    ],
 })
 export class AppModule { }

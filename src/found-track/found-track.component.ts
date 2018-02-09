@@ -9,6 +9,6 @@ import { Track } from '../api/api.structure';
 })
 export class FoundTrackComponent {
     @Input() track: Track;
-    
+
     constructor() {}
 }

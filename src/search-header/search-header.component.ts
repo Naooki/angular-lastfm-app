@@ -10,13 +10,13 @@ import { setTimeout } from 'timers';
   templateUrl: './search-header.component.html',
   styleUrls: ['./search-header.scss']
 })
-export class SearchHeaderComponent { 
-    isSearching: boolean = false;
-    onArtistPage: boolean = false;
+export class SearchHeaderComponent {
+    isSearching = false;
+    onArtistPage = false;
 
     private timeoutID: any = null;
 
-    @ViewChild('searchInput') private searchInput: ElementRef; 
+    @ViewChild('searchInput') private searchInput: ElementRef;
 
     constructor(
         private renderer: Renderer,
@@ -34,7 +34,7 @@ export class SearchHeaderComponent {
     triggerSearching(): void {
         this.isSearching = !this.isSearching;
         if (this.isSearching) {
-            setTimeout(() => { 
+            setTimeout(() => {
                 this.renderer.invokeElementMethod(
                     this.searchInput.nativeElement, 'focus', []);
                 }, 0);
@@ -42,7 +42,7 @@ export class SearchHeaderComponent {
     }
 
     onSearchChange(searchValue: string): void {
-        if(!searchValue) {
+        if (!searchValue) {
             return;
         } else if (!this.apiService.isFetching && !this.timeoutID) {
             this.apiService.searchArtist(searchValue);

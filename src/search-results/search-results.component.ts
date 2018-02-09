@@ -7,7 +7,7 @@ import { ApiService } from '../api/api.service';
   templateUrl: './search-results.component.html',
   styleUrls: ['./search-results.scss']
 })
-export class SearchResultsComponent { 
+export class SearchResultsComponent {
     constructor(
         public apiService: ApiService,
     ) {}

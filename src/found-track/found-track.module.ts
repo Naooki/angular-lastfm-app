@@ -5,6 +5,8 @@ import {
     MatCardModule,
     MatButtonModule,
     MatButtonToggleModule,
+    MatListModule,
+    MatDividerModule,
 } from '@angular/material';
 
 import { FoundTrackComponent } from './found-track.component';
@@ -15,6 +17,8 @@ import { FoundTrackComponent } from './found-track.component';
         MatCardModule,
         MatButtonModule,
         MatButtonToggleModule,
+        MatListModule,
+        MatDividerModule,
     ],
     declarations: [
         FoundTrackComponent,

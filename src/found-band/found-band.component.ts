@@ -9,6 +9,6 @@ import { Artist } from '../api/api.structure';
 })
 export class FoundBandComponent {
     @Input() artist: Artist;
-    
+
     constructor() {}
 }

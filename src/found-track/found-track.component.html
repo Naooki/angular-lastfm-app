@@ -6,8 +6,11 @@
     </mat-card-header>
     <img mat-card-image src="{{track.image[3]['#text'] || 'assets/no-track-image.png'}}" alt="Art of a track">
     <mat-card-content>
-        Listeners: {{track.listeners}}
-        Playcount: {{track.playcount}}
+        <mat-list>
+            <mat-list-item>Listeners: {{track.listeners}}</mat-list-item>
+            <mat-divider></mat-divider>
+            <mat-list-item>Playcount: {{track.playcount}}</mat-list-item>
+        </mat-list>
     </mat-card-content>
     <mat-card-actions>
         <a mat-button href="{{track.url}}">View on LastFM</a>
