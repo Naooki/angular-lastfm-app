@@ -5,11 +5,43 @@ main {
     .spinner, .results {
         margin: auto;
     }
-    
+
     .results {
-        display: flex;
-        flex-wrap: wrap;
-        justify-content: space-evenly;
-        max-width: 1200px;
+        h2 {
+            font-size: 2rem;
+            color: #fff;
+        }
+
+        mat-list-item {
+            color: #fff;
+
+            h4 {
+                color: #b90000;
+            }
+
+            h5 {
+                font-weight: bold;
+            }
+
+            .listeners {
+                mat-icon {
+                    color: #b90000;
+                }
+            }
+        }
+
+        mat-list-item:hover {
+            background-color: rgba(255, 255, 255, 0.04);
+
+            h4 {
+                color: #d50000;
+            }
+
+            .listeners {
+                mat-icon {
+                    color: #d50000;
+                }
+            }
+        }
     }
 }

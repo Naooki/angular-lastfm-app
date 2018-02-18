@@ -1,8 +1,16 @@
 <main>
-    <h2>Top Tracks:</h2>
     <mat-spinner *ngIf="apiService.isFetching" class="spinner"></mat-spinner>
-
-    <div class="results" *ngIf="!apiService.isFetching">
-        <lastfm-found-track [track]="track" *ngFor="let track of topTracks"></lastfm-found-track>
-    </div>
+    <mat-list class="results" *ngIf="topTracks">
+        <h2>Top Tracks:</h2>
+        <mat-list-item *ngFor="let track of topTracks">
+            <mat-icon mat-list-icon>library_music</mat-icon>
+            <h4 mat-line>{{track.artist.name}}</h4>
+            <h5 mat-line>{{track.name}}</h5>
+            <span mat-line>Playcount: {{track.playcount}}</span>
+            <div class="listeners">
+                <mat-icon mat-list-icon>headset</mat-icon>
+                <span>{{track.listeners}}</span>                
+            </div>
+        </mat-list-item>
+    </mat-list>
 </main>
