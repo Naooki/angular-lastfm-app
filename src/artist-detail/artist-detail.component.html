@@ -1,5 +1,5 @@
 <main>
-    <mat-spinner *ngIf="apiService.isFetching" class="spinner"></mat-spinner>
+    <mat-spinner *ngIf="!topTracks" class="spinner"></mat-spinner>
     <mat-list class="results" *ngIf="topTracks">
         <h2>Top Tracks:</h2>
         <mat-list-item *ngFor="let track of topTracks">

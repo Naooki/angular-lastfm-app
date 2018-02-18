@@ -16,7 +16,7 @@ export class ApiService {
     private baseUrl = 'http://ws.audioscrobbler.com/2.0/?method=';
     private apiKey = '605e60f866a7c8cb2424cde63736829b';
 
-    isFetching = false;
+    isFetchingArtists = false;
     foundArtists: Artist[] = [];
     topTracks: Track[] = [];
 
@@ -29,22 +29,20 @@ export class ApiService {
         const searchUrl: string = this.api.artist.search(name);
         this.http.get<Artist[]>(searchUrl)
             .subscribe(this.gotArtists.bind(this));
-        this.isFetching = true;
+        this.isFetchingArtists = true;
     }
 
     private gotArtists(response: SearchArtistResponse): void {
         if (response.results['@attr'].for === this.validSearchString) {
             this.foundArtists = response.results.artistmatches.artist;
-            this.isFetching = false;
+            this.isFetchingArtists = false;
         }
     }
 
     getTopTracks(name: string): Observable<Track[]> {
         const requestUrl: string = this.api.artist.getTopTracks(name);
-        this.isFetching = true;
         return this.http.get<GetTopTracksResponse>(requestUrl)
             .map((resp: GetTopTracksResponse) => {
-                this.isFetching = false;
                 return resp.toptracks.track;
             });
     }

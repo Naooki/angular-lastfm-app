@@ -44,7 +44,7 @@ export class SearchHeaderComponent {
     onSearchChange(searchValue: string): void {
         if (!searchValue) {
             return;
-        } else if (!this.apiService.isFetching && !this.timeoutID) {
+        } else if (!this.apiService.isFetchingArtists && !this.timeoutID) {
             this.apiService.searchArtist(searchValue);
             return;
         }
