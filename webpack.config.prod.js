@@ -1,7 +1,6 @@
 const webpack = require('webpack');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
-const ExtractTextPlugin = require("extract-text-webpack-plugin");
 const path = require('path');
 
 module.exports = {
@@ -32,10 +31,12 @@ module.exports = {
                 loader: 'file-loader?name=assets/[name].[hash].[ext]'
             },
             {
-                test: /theme.scss/,
-                loader: ExtractTextPlugin.extract({
-                    use: ['css-loader', 'sass-loader']
-                })
+                test: /theme.scss$/,
+                use: [
+                    'style-loader', // creates style nodes from JS strings
+                    'css-loader', // translates CSS into CommonJS
+                    'sass-loader', // compiles Sass to CSS
+                ]
             },
             {
                 test: /\.scss$/,
@@ -57,17 +58,6 @@ module.exports = {
     },
 
     plugins: [
-        // Workaround for angular/angular#11580 (https://angular.io/guide/webpack)
-        new webpack.ContextReplacementPlugin(
-            /(.+)?angular(\\|\/)core(.+)?/,
-            path.resolve(__dirname, './src')
-        ),
-
-        new webpack.optimize.CommonsChunkPlugin({
-            name: 'common',
-            chunks: ['vendor', 'app'],
-        }),
-
         new HtmlWebpackPlugin({
             template: 'src/index.html'
         }),
@@ -76,7 +66,5 @@ module.exports = {
             from: 'assets/',
             to: 'assets/'
         }, ]),
-
-        new ExtractTextPlugin('styles/theme.css'),
     ]
 };

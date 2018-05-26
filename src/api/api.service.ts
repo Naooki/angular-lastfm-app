@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Observable } from 'rxjs/Observable';
+import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 
 import {
@@ -41,10 +41,10 @@ export class ApiService {
 
     getTopTracks(name: string): Observable<Track[]> {
         const requestUrl: string = this.api.artist.getTopTracks(name);
-        return this.http.get<GetTopTracksResponse>(requestUrl)
-            .map((resp: GetTopTracksResponse) => {
+        return this.http.get<GetTopTracksResponse>(requestUrl).pipe(
+            map((resp: GetTopTracksResponse) => {
                 return resp.toptracks.track;
-            });
+            }));
     }
 
     private api: ApiStructure = {

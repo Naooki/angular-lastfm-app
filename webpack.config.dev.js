@@ -1,7 +1,6 @@
 const webpack = require('webpack');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
-const ExtractTextPlugin = require("extract-text-webpack-plugin");
 const path = require('path');
 
 module.exports = {
@@ -16,6 +15,18 @@ module.exports = {
     output: {
         filename: '[name].bundle.js',
         path: path.resolve(__dirname, 'dist')
+    },
+
+    optimization: {
+        splitChunks: {
+            cacheGroups: {
+                commons: {
+                    name: "commons",
+                    chunks: "initial",
+                    minChunks: 2,
+                },
+            },
+        },
     },
 
     resolve: {
@@ -43,10 +54,12 @@ module.exports = {
                 loader: 'file-loader?name=assets/[name].[hash].[ext]'
             },
             {
-                test: /theme.scss/,
-                loader: ExtractTextPlugin.extract({
-                    use: ['css-loader', 'sass-loader']
-                })
+                test: /theme.scss$/,
+                use: [
+                    'style-loader', // creates style nodes from JS strings
+                    'css-loader', // translates CSS into CommonJS
+                    'sass-loader', // compiles Sass to CSS
+                ]
             },
             {
                 test: /\.scss$/,
@@ -74,10 +87,11 @@ module.exports = {
             path.resolve(__dirname, './src')
         ),
 
-        new webpack.optimize.CommonsChunkPlugin({
-            name: 'common',
-            chunks: ['vendor', 'app'],
-        }),
+        // Workaround for https://github.com/angular/angular/issues/14898
+        new webpack.ContextReplacementPlugin(
+            /angular(\\|\/)core(\\|\/)@angular/,
+            path.join(__dirname, './ClientApp')
+        ), 
 
         new HtmlWebpackPlugin({
             template: 'src/index.html'
@@ -87,7 +101,5 @@ module.exports = {
             from: 'assets/',
             to: 'assets/'
         }, ]),
-
-        new ExtractTextPlugin('styles/theme.css'),
     ]
 };
